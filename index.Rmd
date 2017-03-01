@@ -1,8 +1,54 @@
 ---
 title: "index.Rmd"
-author: "Ella"
+author: "Ella Vainio"
 date: "28 helmikuuta 2017"
 output: html_document
+e-mail: ella.vainio@helsinki.fi
 ---
 
-This is the final IODS-project! 
+
+#IODS-final
+
+##Childrens food poisoning 
+
+In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. 
+
+The data consists of a sample of children in primary school that has suffered from food poisoning. So the data consists of the information that the children gave regardning what symptoms they had and what they had eaten prior to the food poisoning. 
+
+Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables 'Age' and 'Time' measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the gendero of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were 'sick', 'nausea', 'vomiting', 'abdominals', 'fever' and 'diarrhae'. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were 'potato', 'fish', 'mayo', 'courgette', 'cheese' and 'icecream'. 
+
+```{r echo=FALSE}
+library(FactoMineR)
+data("poison")
+```
+
+```{r echo=FALSE}
+str(poison)
+```
+
+Here I will present the summary of the poison data frame, and we can see easily how many of the children had what kinds of symptomes. For example 17 of the children did not feel sick at the time of the food poisoning, when 38 of the children did. We san see that what kind of symptomes as a much larger variation in comparion to the foods the children had eaten prior to the food poisoning. 
+
+```{r echo=FALSE}
+summary(poison)
+```
+
+##Modified data
+
+Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. So in the data we got the respondents numbers as 'X', and all the different symptomes of food poisoning.
+
+```{r}
+poison_reason <-read.csv("poison_reason.csv", sep = ",", header = TRUE)
+```
+
+
+```{r}
+str(poison_reason)
+```
+
+```{r}
+summary(poison_reason)
+```
+
+
+
+
