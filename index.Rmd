@@ -9,7 +9,7 @@ e-mail: ella.vainio@helsinki.fi
 
 #IODS-final
 
-##Childrens food poisoning 
+###Childrens food poisoning 
 
 In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. 
 
@@ -19,6 +19,10 @@ Here I shall present the structure of the poison data frame. As we can see the d
 
 ```{r echo=FALSE}
 library(FactoMineR)
+library(ggplot2)
+library(tidyr)
+library(corrplot)
+library(dplyr)
 data("poison")
 ```
 
@@ -32,9 +36,18 @@ Here I will present the summary of the poison data frame, and we can see easily 
 summary(poison)
 ```
 
-##Modified data
+```{r}
+gather(poison) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
+```
+
+From this last picture we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. 
+
+
+###Modified data
 
 Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. So in the data we got the respondents numbers as 'X', and all the different symptomes of food poisoning.
+
+I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
 
 ```{r}
 poison_reason <-read.csv("poison_reason.csv", sep = ",", header = TRUE)
@@ -49,6 +62,12 @@ str(poison_reason)
 summary(poison_reason)
 ```
 
+```{r}
+gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
+```
+
+
+mca <- MCA(poison_reason, graph = FALSE)
 
 
 
