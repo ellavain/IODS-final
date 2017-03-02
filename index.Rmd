@@ -3,9 +3,9 @@ title: "index.Rmd"
 author: "Ella Vainio"
 date: "28 helmikuuta 2017"
 output: html_document
-e-mail: ella.vainio@helsinki.fi
----
 
+---
+ella.vainio@helsinki.fi
 
 #IODS-final
 
@@ -17,14 +17,19 @@ The data consists of a sample of children in primary school that has suffered fr
 
 Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables 'Age' and 'Time' measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the gendero of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were 'sick', 'nausea', 'vomiting', 'abdominals', 'fever' and 'diarrhae'. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were 'potato', 'fish', 'mayo', 'courgette', 'cheese' and 'icecream'. 
 
-```{r echo=FALSE}
+```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(FactoMineR)
 library(ggplot2)
 library(tidyr)
 library(corrplot)
 library(dplyr)
+library(MASS)
+```
+
+```{r}
 data("poison")
 ```
+
 
 ```{r echo=FALSE}
 str(poison)
@@ -36,11 +41,13 @@ Here I will present the summary of the poison data frame, and we can see easily 
 summary(poison)
 ```
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 gather(poison) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
 
 From this last picture we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. 
+
+
 
 
 ###Modified data
@@ -49,8 +56,12 @@ Because there is such a small difference in what the children had eaten prior to
 
 I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
 
-```{r}
+```{r echo=FALSE}
 poison_reason <-read.csv("poison_reason.csv", sep = ",", header = TRUE)
+```
+
+```{r echo=FALSE}
+poison_reason <- poison_reason[-1]
 ```
 
 
@@ -67,7 +78,21 @@ gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free"
 ```
 
 
+
+
+```{r echo=FALSE}
 mca <- MCA(poison_reason, graph = FALSE)
+```
+
+```{r}
+summary(mca)
+```
+
+```{r}
+plot(mca, invisible=c("ind"), habillage = "quali")
+```
+
+
 
 
 
