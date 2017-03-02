@@ -10,7 +10,9 @@ https://rdrr.io/cran/FactoMineR/man/poison.text.html
 
 summary(poison)
 str(poison)
+poison <- filter(poison, poison$Age < 20)
 
+summary(poison$Age)
 
 keep_columns <- c("Sick", "Nausea", "Vomiting", "Abdominals", "Fever", "Diarrhae")
 poison_reason <- dplyr::select(poison, one_of(keep_columns))
@@ -28,7 +30,7 @@ summary(mca)
 plot(mca, invisible=c("ind"), habillage = "quali")
 
 
-write.csv(poison_reason, file = "poison_reason.csv")
+write.csv(poison_reason, file = "poison_reason2.csv")
 
 
 

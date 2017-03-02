@@ -21,9 +21,11 @@ ella.vainio@helsinki.fi
 
 In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. 
 
-The data consists of a sample of children in primary school that has suffered from food poisoning. So the data consists of the information that the children gave regardning what symptoms they had and what they had eaten prior to the food poisoning. 
+The data consists of a sample of 55 children in primary school that has suffered from food poisoning. So the data consists of the information that the children gave regardning what symptoms they had and what they had eaten prior to the food poisoning. 
 
-Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables 'Age' and 'Time' measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the gendero of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were 'sick', 'nausea', 'vomiting', 'abdominals', 'fever' and 'diarrhae'. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were 'potato', 'fish', 'mayo', 'courgette', 'cheese' and 'icecream'. 
+Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables 'Age' and 'Time' measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the gender of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were 'sick', 'nausea', 'vomiting', 'abdominals', 'fever' and 'diarrhae'. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were 'potato', 'fish', 'mayo', 'courgette', 'cheese' and 'icecream'. 
+
+The data is classified in yes or no, wheter the child expirienced a specific symptome or not, and if the child had eaten a specific sort of food or not
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(FactoMineR)
@@ -42,6 +44,7 @@ data("poison")
 ```{r echo=FALSE}
 str(poison)
 ```
+The cariables are meaured either one or two. Number one means that the specific symptome of the specific food was not a part of the food poisoning, and number two indicates that it has accured. 
 
 Here I will present the summary of the poison data frame, and we can see easily how many of the children had what kinds of symptomes. For example 17 of the children did not feel sick at the time of the food poisoning, when 38 of the children did. We san see that what kind of symptomes as a much larger variation in comparion to the foods the children had eaten prior to the food poisoning. 
 
@@ -52,20 +55,21 @@ summary(poison)
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 gather(poison) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
+From this table we can visualize the specific distribution of a variable. Here we can see that the least common symptome of food poisoning in this sample is nausea, and the more common symptomes for food poisoning is diarrhea, fever, abdominal (pain) and sickess. 
 
-From this last picture we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. 
+But we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. 
 
 
 
 
 ###Modified data
 
-Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. So in the data we got the respondents numbers as 'X', and all the different symptomes of food poisoning.
+Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
 
 I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
 
 ```{r echo=FALSE}
-poison_reason <-read.csv("poison_reason.csv", sep = ",", header = TRUE)
+poison_reason <-read.csv("poison_reason2.csv", sep = ",", header = TRUE)
 ```
 
 ```{r echo=FALSE}
