@@ -81,7 +81,7 @@ str(poison_reason)
 summary(poison_reason)
 ```
 
-```{r}
+```{r warning=FALSE, error=FALSE, message=FALSE}
 gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
 
