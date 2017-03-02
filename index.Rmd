@@ -49,7 +49,7 @@ Here I will present the summary of the poison data frame, and we can see easily 
 summary(poison)
 ```
 
-```{r message=FALSE, warning=FALSE,}
+```{r message=FALSE, warning=FALSE, error=FALSE}
 gather(poison) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
 
