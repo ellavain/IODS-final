@@ -1,33 +1,33 @@
+
+#Accessing libraries
 library (tidyr)
 library (dplyr)
 library (ggplot2)
 library(FactoMineR)
+
+#Accessing the data
 data("poison")
 
-https://rdrr.io/cran/FactoMineR/man/poison.html <- what the data is based upon
+#Information regarding data frame
+https://rdrr.io/cran/FactoMineR/man/poison.html 
 https://rdrr.io/cran/FactoMineR/man/poison.text.html 
 
 
-summary(poison)
-str(poison)
-poison <- filter(poison, poison$Age < 20)
+#Summary and structure of data frame
+summary(poison) #Age varible odd, max. value 88
+str(poison) #55 observations, 15 variables
 
-summary(poison$Age)
+#Excluding individuals over the age of 20
+poison <- filter(poison, poison$Age < 20) #47 observations, 15 variables
 
-keep_columns <- c("Sick", "Nausea", "Vomiting", "Abdominals", "Fever", "Diarrhae")
+
+#Choosing only symptome variables
+keep_columns <- c("Sick", "Nausea", "Vomiting", "Abdominals", "Fever", "Diarrhae") 
 poison_reason <- dplyr::select(poison, one_of(keep_columns))
 
-summary(poison_reason)
-str(poison_reason)
+summary(poison_reason) #all variables chategorical variables, has a choice of 'yes' or 'no'
+str(poison_reason) #47 observations, 6 variables
 
-gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
-
-
-mca <- MCA(poison_reason, graph = FALSE)
-
-summary(mca)
-
-plot(mca, invisible=c("ind"), habillage = "quali")
 
 
 write.csv(poison_reason, file = "poison_reason2.csv")

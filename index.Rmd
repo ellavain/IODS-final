@@ -81,16 +81,27 @@ poison_reason <- poison_reason[-1]
 str(poison_reason)
 ```
 
+As we can see, the data consists of 6 variables and 47 observations of children that had food poisoning, and what kind of symptomes they had. All the variables are chategorize that conist of having or not having the symptome during the food poisoning.
+
 ```{r}
 summary(poison_reason)
 ```
 
+Here we can see that the most common symptome during food poisoning in this sample of primary school children is sickness. 
+
+
+
+
 ```{r warning=FALSE, error=FALSE, message=FALSE}
-gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
+gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + col(deeppink2)
 ```
 
+Here is a clear structure on how the different symptomes are distributed. The least common form of symptome during the food poisoning is nausea. 
 
 
+###Multiple Correspondence Analysis
+
+Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables. 
 
 ```{r echo=FALSE}
 mca <- MCA(poison_reason, graph = FALSE)
