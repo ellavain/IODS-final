@@ -93,7 +93,7 @@ Here we can see that the most common symptome during food poisoning in this samp
 
 
 ```{r warning=FALSE, error=FALSE, message=FALSE}
-gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + col(deeppink2)
+gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
 
 Here is a clear structure on how the different symptomes are distributed. The least common form of symptome during the food poisoning is nausea. 
@@ -101,15 +101,42 @@ Here is a clear structure on how the different symptomes are distributed. The le
 
 ###Multiple Correspondence Analysis
 
-Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables. 
+Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables at once. This method is used to compare relationships between different variables. This is specifically used only with many chategorical variables. Multiple Correspondence Analysis is similar to Principal Component Analysis, where they differ in MCA focusing on qualitative data and PCA on quantitative data.  
 
-```{r echo=FALSE}
+```{r}
 mca <- MCA(poison_reason, graph = FALSE)
 ```
+
+To summarise the MCA on the poison_reason data frame, there are 4 different things that needs to be interpeted: eigenvalues, individuals, categories and categorical variables. 
+
+####*Eigenvalues*
+The eigenvalues describe how much of the variance in the data is explained by each dimension. The first dimension explains 68,7% of the variation in the variance. The first dimension always has the highest procent of the variance explained. The next dimension will have the next highest variance and so forth. But the bigger the explained variance there is, the better the dimension.
+
+####*Individuals*
+Here we look at the 10 first individuals of the data frame, and we shall look for 3 different things: the individuals placement (coordinates), the individuals contributions in percent and the squared correlations in the dimension. And all of these things are done individually in all the 3 first dimensions. 
+          
+We can see that the second and forth individual has a very high squared correlation with the first dimension(0.996). They also got very high contributions to the dimension (4.289)
+
+####*Categories*
+Here we are studying the ten first categorize, and 4 different values. The categorize are sick_n, sick_y, nausea_n, nausea_y, vomit_n, vomit_y, abdo_n, abdo_y, fever_n and fever_y. So we get the category coordinates, the category contributions in percent, the squared correlations in the specific dimension, and also v.test value, that meaures if the category is over 1.96 or under -1.96 the the categories are significantly different from zero. 
+         
+We can see that none of the ten first values in the first dimension is between -1.96 and 1.96. This means that all the categories are significantly different from zero. 
+
+####*Categorical variables*
+Here we are looking at all the categorical variables: sick, nausea, vomit, abdo, fever and diarrahe. There we look at the squared correlation between each variable and dimension. The closer the value is to 1, the higher the correlation between the category and dimension. 
+         
+We can see that the first category 'sick' has a very high squared correlation with the first dimension (0.945), the second variable has the strongest squared correlation with the second dimension (0.619), and the third variable 'vomit' is quite evenly distributed between the dimensions (0.397, 0.251, 0.348 ). 
+
+
 
 ```{r}
 summary(mca)
 ```
+
+###Interpeting the poison_reason data frame
+
+
+
 
 ```{r}
 plot(mca, invisible=c("ind"), habillage = "quali")
