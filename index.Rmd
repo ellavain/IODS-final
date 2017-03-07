@@ -184,7 +184,7 @@ We can see that the first category 'sick' has a very high squared correlation wi
 
 ##Interpeting the Multiple Correspondence Analysis results
 
-The first dimension explains 68.69% of the variation in the variances, which is quite high. The values Sick, Diarrhea, Abdo and Fever are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension. 
+The first dimension explains 68.69% of the variation in the variances, which is quite high. The values Sick, Diarrhea, Abdo and Fever are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension.  
 
 Nausea variable is quite well explained by the second dimension, and the last variable vomiting is quite evenly distributed between the dimensions. 
 
