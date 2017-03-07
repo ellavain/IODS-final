@@ -94,7 +94,7 @@ Because there is such a small difference in what the children had eaten prior to
 [https://github.com/ellavain/IODS-final/blob/master/data/poison_reason2017.R]
 
 
-###Summarising the new data set 'poison_reason
+###Summarising the new data set poison_reason
 
 I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
 
@@ -182,7 +182,7 @@ Here we are looking at all the categorical variables: sick, nausea, vomit, abdo,
 We can see that the first category 'sick' has a very high squared correlation with the first dimension (0.945), the second variable has the strongest squared correlation with the second dimension (0.619), and the third variable 'vomit' is quite evenly distributed between the dimensions (0.397, 0.251, 0.348 ). 
 
 
-##Interpeting the poison_reason data frame
+##Interpeting the Multiple Correspondence Analysis results
 
 The first dimension explains 68.69% of the variation in the variances, which is quite high. The values Sick, Diarrhea, Abdo and Fever are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension. 
 
