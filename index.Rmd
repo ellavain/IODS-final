@@ -1,7 +1,7 @@
 ---
 title: "index.Rmd"
 author: "Ella Vainio"
-date: "28 helmikuuta 2017"
+date: "7 March 2017"
 output:
   html_document:
     theme: cosmo
@@ -13,11 +13,14 @@ output:
     code_folding: show 
 
 ---
-ella.vainio@helsinki.fi
+e-mail: ella.vainio@helsinki.fi
 
 #IODS-final
 
-###Childrens food poisoning 
+##Abstract
+The final assignment consists of performing a Multiple Correspondence Analysis of the modified data frame 'poison'(FactoMiner), where the analysis compares the symptomes of the food poisoning, excluding the foods eaten prior to the food poisoning. 
+
+##Childrens food poisoning 
 
 In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. 
 
@@ -44,9 +47,26 @@ data("poison")
 ```{r echo=FALSE}
 str(poison)
 ```
-The cariables are meaured either one or two. Number one means that the specific symptome of the specific food was not a part of the food poisoning, and number two indicates that it has accured. 
+The variables are measured either one or two. Number one means that the specific symptome of the specific food was not a part of the food poisoning, and number two indicates that it has accured. 
 
 Here I will present the summary of the poison data frame, and we can see easily how many of the children had what kinds of symptomes. For example 17 of the children did not feel sick at the time of the food poisoning, when 38 of the children did. We san see that what kind of symptomes as a much larger variation in comparion to the foods the children had eaten prior to the food poisoning. 
+
+* Age ranges from 4-88
+* Time ranges between 00.00-22.00
+* Sick: no=17, yes=38
+* Sex: Female=28, Male= 27
+* Nausea: no=43, yes=12
+* Vomiting: no=33, yes=22
+* Abdominals: no=18, yes=37
+* Fever: no= 20, yes=35
+* Diarrhea: no=20, yes=35
+* Potato: no=3, yes=52
+* Fish: no=1, yes=54
+* Mayo: no=10, yes=45
+* Courgette: no=5, yes=50
+* Cheese: no=7, yes=48
+* Ice cream: no=4, yes=51
+
 
 ```{r echo=FALSE}
 summary(poison)
@@ -55,14 +75,17 @@ summary(poison)
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 gather(poison) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
-From this table we can visualize the specific distribution of a variable. Here we can see that the least common symptome of food poisoning in this sample is nausea, and the more common symptomes for food poisoning is diarrhea, fever, abdominal (pain) and sickess. 
+From this table we can visualize the specific distribution of a variable. Here we can see that the least common symptome of food poisoning in this sample is nausea, and the more common symptomes for food poisoning is diarrhea, fever, abdominal (pain) and sickess. All of the foods eaten prior to the food poisoning has been eaten by almost all of the children. Due to the foods most of them being quite common causing the food poisoning, it either says that this specific food that contained these ingredients was not properly made, and caused food poisoning to the primary school children, or then it may indicate that some sorts of food more easily cause food poisoning. 
 
-But we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. 
+```{r}
+table(poison$Age)
+```
 
 
+But we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. The values above the age of 20 will be excluded in the upcoming analysis.
 
 
-###Modified data
+##Modified data
 
 Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
 
@@ -81,25 +104,37 @@ poison_reason <- poison_reason[-1]
 str(poison_reason)
 ```
 
-As we can see, the data consists of 6 variables and 47 observations of children that had food poisoning, and what kind of symptomes they had. All the variables are chategorize that conist of having or not having the symptome during the food poisoning.
 
 ```{r}
 summary(poison_reason)
 ```
+As we can see, the data consists of 6 variables and 47 observations of children that had food poisoning, and what kind of symptomes they had. All the variables are chategorized that consist of having or not having the symptome during the food poisoning.
 
-Here we can see that the most common symptome during food poisoning in this sample of primary school children is sickness. 
-
-
+* Sick: no=15, yes=32
+* Nausea: no=36, yes=11
+* Vomiting: no=27, yes=20
+* Abdominals: no=16, yes=36
+* Fever: no=18, yes=29
+* Diarrhae: no=18, yes=29
 
 
 ```{r warning=FALSE, error=FALSE, message=FALSE}
 gather(poison_reason) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar()
 ```
 
-Here is a clear structure on how the different symptomes are distributed. The least common form of symptome during the food poisoning is nausea. 
+From the summary and the tables of the new data poison_reason, we can easily find what the most common sympomes during food poisoning are.
+
+We can see that having sickness as a symptome is the most common where 32 out of 47 expirienced it. Fever, abdominal and diarrhea have similar results (29, 31, 29). A little less than  half of the children had expirienced vomiting during their food poiosoning (20). And the least common symptome during food poisoning was nausea (11).
 
 
-###Multiple Correspondence Analysis
+
+##Research question
+
+My reasearch question is regarding what kind of correlations and connection the different categorical variables has between each other. Because all the categorical variables I will be looking in to, are symptomes of food poisoning, I believe there to be a strong connection between each variable. I believe that the symptomes won't variate significantly from each other. 
+
+Because my data consists of categorical variables, I will be performing a multiple correspondence analysis.
+
+##Multiple Correspondence Analysis
 
 Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables at once. This method is used to compare relationships between different variables. This is specifically used only with many chategorical variables. Multiple Correspondence Analysis is similar to Principal Component Analysis, where they differ in MCA focusing on qualitative data and PCA on quantitative data.  
 
@@ -107,40 +142,58 @@ Multiple Correspondence Analysis is a way of analyzing more than two chategorica
 mca <- MCA(poison_reason, graph = FALSE)
 ```
 
-To summarise the MCA on the poison_reason data frame, there are 4 different things that needs to be interpeted: eigenvalues, individuals, categories and categorical variables. 
-
-####*Eigenvalues*
-The eigenvalues describe how much of the variance in the data is explained by each dimension. The first dimension explains 68,7% of the variation in the variance. The first dimension always has the highest procent of the variance explained. The next dimension will have the next highest variance and so forth. But the bigger the explained variance there is, the better the dimension.
-
-####*Individuals*
-Here we look at the 10 first individuals of the data frame, and we shall look for 3 different things: the individuals placement (coordinates), the individuals contributions in percent and the squared correlations in the dimension. And all of these things are done individually in all the 3 first dimensions. 
-          
-We can see that the second and forth individual has a very high squared correlation with the first dimension(0.996). They also got very high contributions to the dimension (4.289)
-
-####*Categories*
-Here we are studying the ten first categorize, and 4 different values. The categorize are sick_n, sick_y, nausea_n, nausea_y, vomit_n, vomit_y, abdo_n, abdo_y, fever_n and fever_y. So we get the category coordinates, the category contributions in percent, the squared correlations in the specific dimension, and also v.test value, that meaures if the category is over 1.96 or under -1.96 the the categories are significantly different from zero. 
-         
-We can see that none of the ten first values in the first dimension is between -1.96 and 1.96. This means that all the categories are significantly different from zero. 
-
-####*Categorical variables*
-Here we are looking at all the categorical variables: sick, nausea, vomit, abdo, fever and diarrahe. There we look at the squared correlation between each variable and dimension. The closer the value is to 1, the higher the correlation between the category and dimension. 
-         
-We can see that the first category 'sick' has a very high squared correlation with the first dimension (0.945), the second variable has the strongest squared correlation with the second dimension (0.619), and the third variable 'vomit' is quite evenly distributed between the dimensions (0.397, 0.251, 0.348 ). 
-
+To summarise the MCA on the poison_reason data frame, there are 4 different things that needs to be interpeted: **eigenvalues**, **individuals**, **categories** and **categorical variables**. 
 
 
 ```{r}
 summary(mca)
 ```
 
-###Interpeting the poison_reason data frame
+**Eigenvalues**
+
+The eigenvalues describe how much of the variance in the data is explained by each dimension. The first dimension explains 68,7% of the variation in the variance. The first dimension always has the highest procent of the variance explained. The next dimension will have the next highest variance and so forth. But the bigger the explained variance there is, the better the dimension.
+
+In other words this means that a large majority of the variables are explained by one dimension, which indicates there not being very big differences between the categorical variables. But there is still 31,3% of the variance not explained by the first dimension, which means that there are some differences after all between the variables.
+
+**Individuals**
+
+Here we look at the 10 first individuals of the data frame, and we shall look for 3 different things: the individuals placement (coordinates) in the dimension, the individuals contributions in percent and the squared correlations in the dimension. And all of these things are done individually in all the 3 first dimensions. 
+          
+We can see that the second and forth individual has a very high squared correlation with the first dimension(0.996). They also got very high contributions to the dimension (4.289). This indicated that the first dimension explains the variances very well in the second and forth individual. 
+
+**Categories**
+
+Here we are studying the ten first categorize, and 4 different values. The categorize are sick_n, sick_y, nausea_n, nausea_y, vomit_n, vomit_y, abdo_n, abdo_y, fever_n and fever_y. So we get the category coordinates, the category contributions in percent, the squared correlations in the specific dimension, and also v.test value, that meaures if the category is over 1.96 or under -1.96 the the categories are significantly different from zero. 
+         
+We can see that none of the ten first values in the first dimension is between -1.96 and 1.96. This means that all the categories are significantly different from zero. This is something very interesting and unexpected. All the values range from -6.593 to -3.312 and 3.312 to 6.593. 
+
+**Categorical variables**
+
+Here we are looking at all the categorical variables: sick, nausea, vomit, abdo, fever and diarrahe. There we look at the squared correlation between each variable and dimension. The closer the value is to 1, the higher the correlation between the category and dimension. 
+         
+We can see that the first category 'sick' has a very high squared correlation with the first dimension (0.945), the second variable has the strongest squared correlation with the second dimension (0.619), and the third variable 'vomit' is quite evenly distributed between the dimensions (0.397, 0.251, 0.348 ). 
 
 
+##Interpeting the poison_reason data frame
 
+The first dimension explains 68.69% of the variation in the variances, which is quite high. The values Sick, Diarrhea, Abdo and Fever are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension. 
+
+Nausea variable is quite well explained by the second dimension, and the last variable vomiting is quite evenly distributed between the dimensions. 
+
+There is also the distribution of the yes or no to a specific symptome, and here it gets visualized that all the syptomes that the individuals did not have, are distributed on to the right side, and all of the symptomes that the children expirienced furing the food poisoning are on the left side of the MCA factor map. This is probably due to the similarity of the 'no' answers in all of the categorical variables. 
+
+To conclude there is the strongest correlation and connection between the variables Sick, Diarrhea, Abdo and Fever, and slightly less correlation between Vomit and Nausea. The results that came out of the MCA where slightly different from my hypothesis, that there wouldbe no difference between the different symptomes of food poisoning. This might be due to there being less individuals experiencing nausea and vomiting. 
 
 ```{r}
 plot(mca, invisible=c("ind"), habillage = "quali")
 ```
+
+##Sources
+[https://rdrr.io/cran/FactoMineR/man/poison.html] 
+
+[https://rdrr.io/cran/FactoMineR/man/poison.text.html] 
+
+[https://campus.datacamp.com/courses/helsinki-open-data-science/dimensionality-reduction-techniques?ex=10]
 
 
 
