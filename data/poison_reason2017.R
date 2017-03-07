@@ -1,3 +1,7 @@
+#Ella Vainio
+#March 7 2017
+#Preprocessing 'poison' data
+
 
 #Accessing libraries
 library (tidyr)
