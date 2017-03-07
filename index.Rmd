@@ -87,9 +87,15 @@ But we can see that there is something odd in the age variable. The data should 
 
 ##Modified data
 
+[https://github.com/ellavain/IODS-final/blob/master/data/poison_reason2017.R]
+
+*Modified poison data*
+
 Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
 
 I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
+
+
 
 ```{r}
 poison_reason <-read.csv("poison_reason2.csv", sep = ",", header = TRUE)
