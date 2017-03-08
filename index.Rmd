@@ -18,17 +18,17 @@ e-mail: ella.vainio@helsinki.fi
 #IODS-final
 
 ##Abstract
-The final assignment consists of performing a Multiple Correspondence Analysis of the modified data frame 'poison'(FactoMiner), where the analysis compares the symptomes of the food poisoning, excluding the foods eaten prior to the food poisoning. 
+The final assignment consists of performing a Multiple Correspondence Analysis of the modified data frame 'poison'(FactoMiner), where the analysis compares the symptomes of the food poisoning, excluding the foods eaten prior to the food poisoning. My hypothesis regarding the data is that all of the symptomes will be quite similar in corrleation and connection with each other. The results showed that 4 out of 6 variables where well explained by one dimension, while the two remaining were either well explained by another dimension, or evently distributed between the 3 first dimensions. This concludes that not all of the variables are correlated and connected in a similar way with each other. 
 
 ##Childrens food poisoning 
 
-In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. 
+In my final task I will be doing a Multiple Correspondence Analysis on the Poison data frame from the FactoMiner package. The data will be modified to serve a better purpose for the research question. But first I will present the original data frame, and afterwards I will present the new modified data frame.  
 
 The data consists of a sample of 55 children in primary school that has suffered from food poisoning. So the data consists of the information that the children gave regardning what symptoms they had and what they had eaten prior to the food poisoning. 
 
-Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables 'Age' and 'Time' measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the gender of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were 'sick', 'nausea', 'vomiting', 'abdominals', 'fever' and 'diarrhae'. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were 'potato', 'fish', 'mayo', 'courgette', 'cheese' and 'icecream'. 
+Here I shall present the structure of the poison data frame. As we can see the data consists of 15 variables and 55 observations. The two first variables *Age* and *Time* measures how old the child was during the food poisoning, and what time this occured. There is also a variable that measures the *gender* of the child. There is a also cathegory of what kind of symptomes the child did or didn't expirienced during the food poisoning, that were *sick*, *nausea*, *vomiting*, *abdominals*, *fever* and *diarrhae*. The rest of the variables finds out what sort of food the child had eaten or not eaten prior to the food poisoning. The alternatives were *potato*, *fish*, *mayo*, *courgette*, *cheese* and *icecream*. 
 
-The data is classified in yes or no, wheter the child expirienced a specific symptome or not, and if the child had eaten a specific sort of food or not
+The data is categorized in either yes or no, wheter the child expirienced a specific symptome or not, and if the child had eaten a specific sort of food or not. This is meant to 
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 library(FactoMineR)
@@ -47,7 +47,7 @@ data("poison")
 ```{r echo=FALSE}
 str(poison)
 ```
-The variables are measured either one or two. Number one means that the specific symptome of the specific food was not a part of the food poisoning, and number two indicates that it has accured. 
+The variables are measured either one or two. Number one means that the specific symptome or the specific food was not a part of the food poisoning, and number two indicates that the specific symptome has occured or that the specific food had been digested prior to the food poisoning. 
 
 Here I will present the summary of the poison data frame, and we can see easily how many of the children had what kinds of symptomes. For example 17 of the children did not feel sick at the time of the food poisoning, when 38 of the children did. We san see that what kind of symptomes as a much larger variation in comparion to the foods the children had eaten prior to the food poisoning. 
 
@@ -81,13 +81,12 @@ From this table we can visualize the specific distribution of a variable. Here w
 table(poison$Age)
 ```
 
-
-But we can see that there is something odd in the age variable. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. The values above the age of 20 will be excluded in the upcoming analysis.
+Something that caught my attenttion is the age variable, and that something is slightly odd. The data should only consist of children in primary school, but there are also much higher values in the data i.e. 88 years being the maximum age. The values above the age of 20 will be excluded in the upcoming analysis. This means that the individuals aged 36, 45, 72, 79, 82, 83, 85 and 88 will be excluded in the upcoming new data frame. 
 
 
 ##Modified data
 
-Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had. So I created a data set 'poison_reason' to explore further. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
+Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had during the food poisoning. I created a data set *poison_reason* to explore further the symptomes, and also the connections and corrleations between each variable. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
 
 *Modified data file*
 
@@ -96,7 +95,7 @@ Because there is such a small difference in what the children had eaten prior to
 
 ###Summarising the new data set poison_reason
 
-I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. 
+I will be presenting the structure of the new data frame, summary and also a visual distribution of the different chategorical variables. It is very similar to the prior structure and summary, only having a little less variables and observations as before. 
 
 
 ```{r}
@@ -138,19 +137,19 @@ We can see that having sickness as a symptome is the most common where 32 out of
 
 ##Research question
 
-My reasearch question is regarding what kind of correlations and connection the different categorical variables has between each other. Because all the categorical variables I will be looking in to, are symptomes of food poisoning, I believe there to be a strong connection between each variable. I believe that the symptomes won't variate significantly from each other. 
+My reasearch question is regarding what kind of correlations and connection the different categorical variables has between each other. Because all the categorical variables I will be looking in to, are symptomes of food poisoning, I believe there to be a strong connection between each variable. All the variables have a common factor, and that is that they measure a symptome of food poisoning. I also believe that the symptomes won't variate significantly from each other, due to the prior statements of the similarity in what the variables measure. 
 
-Because my data consists of categorical variables, I will be performing a multiple correspondence analysis.
+Because my data consists of categorical variables, I will be performing a multiple correspondence analysis. With this method it is possible to compare all the different categorical variables with each other at the same time. This gives the oppertunity to find interesting and mabye unexpected results regarding the connections between the variables. 
 
 ##Multiple Correspondence Analysis
 
-Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables at once. This method is used to compare relationships between different variables. This is specifically used only with many chategorical variables. Multiple Correspondence Analysis is similar to Principal Component Analysis, where they differ in MCA focusing on qualitative data and PCA on quantitative data.  
+Multiple Correspondence Analysis is a way of analyzing more than two chategorical variables at once. This method is used to compare relationships between different variables. This is specifically used only with many categorical variables. Multiple Correspondence Analysis is similar to Principal Component Analysis, where they differ in MCA focusing on qualitative data and PCA on quantitative data.  
 
 ```{r}
 mca <- MCA(poison_reason, graph = FALSE)
 ```
 
-To summarise the MCA on the poison_reason data frame, there are 4 different things that needs to be interpeted: **eigenvalues**, **individuals**, **categories** and **categorical variables**. 
+To summarise the MCA on the poison_reason data frame, there are 4 different things that needs to be interpeted: **eigenvalues**, **individuals**, **categories** and **categorical variables**. These different values will individually and together with each other, explain the relationship of the connections between the variables and the dimensions, and it will also be very important in trying to interpet the MCA factor map. 
 
 
 ```{r}
@@ -184,13 +183,15 @@ We can see that the first category 'sick' has a very high squared correlation wi
 
 ##Interpeting the Multiple Correspondence Analysis results
 
-The first dimension explains 68.69% of the variation in the variances, which is quite high. The values Sick, Diarrhea, Abdo and Fever are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension.  
+The first dimension explains 68.69% of the variation in the variances, which is quite high. The values *Sick*, *Diarrhea*, *Abdo* and *Fever* are all aligned horizontally close to the 0.0. This means that all of these varibles are very similar to each other, and are all represented very well in the first dimension. This is not an unexpected result, becuase all of these variables had a majority in having the symptome, in comparison to not having the symptome during the food poisoning. 
 
-Nausea variable is quite well explained by the second dimension, and the last variable vomiting is quite evenly distributed between the dimensions. 
+*Nausea* variable is quite well explained by the second dimension, and had the least observations in having the symtpome. The last variable *vomiting* is quite evenly distributed between the all of the 3 dimensions. *Vomiting* is the only variable that hasn't a very big difference between the having and not having the symptome, when the majority has not had the symptome. This makes the last variable different from all of the other variables. This might also be an explanation to why it is evenly spred between the different dimensions.  
 
-There is also the distribution of the yes or no to a specific symptome, and here it gets visualized that all the syptomes that the individuals did not have, are distributed on to the right side, and all of the symptomes that the children expirienced furing the food poisoning are on the left side of the MCA factor map. This is probably due to the similarity of the 'no' answers in all of the categorical variables. 
+There is also the distribution of the yes or no to a specific symptome, and here it gets visualized that all the syptomes that the individuals did not have, are distributed on to the right side, and all of the symptomes that the children expirienced furing the food poisoning are on the left side of the MCA factor map. This is probably due to the similarity of the 'no' and 'yes' answers in all of the categorical variables. This is once again not a very surprising discovery, because answering yes or no is always excluding the possiblitity to answer the other one. 
 
-To conclude there is the strongest correlation and connection between the variables Sick, Diarrhea, Abdo and Fever, and slightly less correlation between Vomit and Nausea. The results that came out of the MCA where slightly different from my hypothesis, that there wouldbe no difference between the different symptomes of food poisoning. This might be due to there being less individuals experiencing nausea and vomiting. 
+To conclude there is the strongest correlation and connection between the variables *Sick*, *Diarrhea*, *Abdo* and *Fever*, and slightly less correlation between *Vomit* and *Nausea*. The results that came out of the MCA where slightly different from my hypothesis, that there wouldbe no difference between the different symptomes of food poisoning. This might be due to there being less individuals experiencing nausea and vomiting.
+
+To validate the Multiple Correspondence Analysis, I believe that it would have been better to use a data that was bigger and had more variation to it. I state this, because I believe that the small amount of observations and the similarity in what the variables measured did not give very much interesting information regarding the relationships between the variables. In the last exercise the *tea* variable had more variating and different variables regarding tea time, which gave much more interesting results and more unexpected results regarding the connections between the variables. 
 
 ```{r}
 plot(mca, invisible=c("ind"), habillage = "quali")
