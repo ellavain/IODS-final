@@ -86,7 +86,7 @@ Something that caught my attenttion is the age variable, and that something is s
 
 ##Modified data
 
-Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had during the food poisoning. I created a data set *poison_reason* to explore further the symptomes, and also the connections and corrleations between each variable. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
+Because there is such a small difference in what the children had eaten prior to the food poisoning, I will only be focusing on the symptomes they had during the food poisoning. I created a data set **poison_reason** to explore further the symptomes, and also the connections and corrleations between each variable. I also changed the 'age' variable, so that the age group is between 0-20, because the target group was primary school children. This change in the data led to excluding 7 individuals, so we are down to 47 observaions. Otherwise the data consists of all the different symptomes of food poisoning.
 
 *Modified data file*
 
